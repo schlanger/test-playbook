@@ -1,11 +1,15 @@
 - name: Installer et configurer NGINX sur AlmaLinux
   hosts: localhost
-  become: true
+- name: Mettre à jour les paquets sur localhost
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  vars_files:
+    - secrets.yml
   tasks:
     - name: Mettre à jour les paquets
-      dnf:
-        name: "*"
-        state: latest
+      ansible.builtin.apt:
+        update_cache: yes:  become: true
 
     - name: Installer NGINX
       dnf:
