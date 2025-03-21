@@ -9,7 +9,7 @@
   tasks:
     - name: Mettre à jour les paquets
       ansible.builtin.apt:
-        update_cache: yes:  become: true
+        update_cache: yes 
 
     - name: Installer NGINX
       dnf:
