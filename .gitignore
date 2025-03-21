@@ -1,0 +1,12 @@
+# Fichiers sensibles
+*.vault
+*.retry
+*.log
+*.cfg
+*.pyc
+*.swp
+secrets.yml
+# Répertoires à ignorer
+__pycache__/
+venv/
+.env/

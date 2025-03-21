@@ -8,7 +8,7 @@
     - secrets.yml
   tasks:
     - name: Mettre à jour les paquets
-      ansible.builtin.apt:
+      ansible.builtin.dnf:
         update_cache: yes 
 
     - name: Installer NGINX
