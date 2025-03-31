@@ -1,0 +1,9 @@
+- name: Modifier du texte dans un fichier sans sudo
+  hosts: localhost
+  tasks:
+    - name: Remplacer "Hello" par "Bonjour"
+      ansible.builtin.lineinfile:
+        path: "/home/user/test.txt"
+        regexp: "Hello"
+        line: "Bonjour, ceci est un test."
+
