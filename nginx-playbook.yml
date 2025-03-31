@@ -1,23 +1,24 @@
-- name: Vérifier si sudo fonctionne
-  command: sudo whoami
-  register: whoami_result
-  changed_when: false
-
-- debug:
-    var: whoami_result.stdout
-
 - name: Installer et configurer NGINX sur AlmaLinux
   hosts: localhost
   become: yes
   become_method: sudo
   vars_files:
     - secrets.yml
+
   tasks:
+    - name: Vérifier si sudo fonctionne
+      ansible.builtin.command: sudo -l
+      register: sudo_test
+      ignore_errors: yes
+
+    - name: Afficher le résultat de la vérification sudo
+      ansible.builtin.debug:
+        msg: "{{ sudo_test.stdout }}"
+
     - name: Mettre à jour les paquets
       ansible.builtin.dnf:
         name: "*"
         state: latest
-        update_cache: yes 
 
     - name: Installer NGINX
       ansible.builtin.dnf:
@@ -48,3 +49,4 @@
     - name: Recharger le firewall
       ansible.builtin.command:
         cmd: firewall-cmd --reload
+
