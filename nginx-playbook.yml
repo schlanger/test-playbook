@@ -1,3 +1,11 @@
+- name: Vérifier si sudo fonctionne
+  command: sudo whoami
+  register: whoami_result
+  changed_when: false
+
+- debug:
+    var: whoami_result.stdout
+
 - name: Installer et configurer NGINX sur AlmaLinux
   hosts: localhost
   become: yes
