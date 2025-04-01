@@ -1,6 +1,6 @@
 - name: Installer et configurer NGINX sur AlmaLinux
   hosts: localhost
-  #become: yes
+  become: yes
   #become_method: sudo
   vars_files:
     - secrets.yml
