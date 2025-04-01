@@ -37,7 +37,9 @@
         content: |
           <html>
             <head><title>NGINX Test</title></head>
-            <body><h1>Hello from Ansible AWX!</h1></body>
+            <body><h1>Hello from Ansible AWX!</h1>
+              <h2>I am Yehouda the new Devops apprenticeship! </h2>
+            </body>
           </html>
 
     - name: Ouvrir le port 80 dans le firewall
