@@ -1,10 +1,5 @@
 - name: Installer et configurer NGINX sur AlmaLinux
   hosts: localhost
-  become: yes
-  become_method: sudo
-  vars:
-    ansible_become_flags: '-n'
-    ansible_remote_tmp: "/tmp/.ansible"
   vars_files:
     - secrets.yml
 
@@ -22,19 +17,16 @@
       ansible.builtin.dnf:
         name: "*"
         state: latest
-      become: yes
 
     - name: Installer NGINX
       ansible.builtin.dnf:
         name: nginx
         state: present
-      become: yes
     - name: Activer et démarrer NGINX
       ansible.builtin.systemd:
         name: nginx
         enabled: yes
         state: started
-      become: yes
     - name: Déployer une page web personnalisée
       ansible.builtin.copy:
         dest: /usr/share/nginx/html/index.html
@@ -44,15 +36,12 @@
             <body><h1>Hello from Ansible AWX!</h1>
             </body>
           </html>
-      become: yes
     - name: Ouvrir le port 80 dans le firewall
       ansible.builtin.firewalld:
         service: http
         permanent: yes
         state: enabled
-      become: yes
 
     - name: Recharger le firewall
       ansible.builtin.command:
         cmd: firewall-cmd --reload
-      become: yes
