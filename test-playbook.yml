@@ -1,23 +1,15 @@
 
-- name: Envoyer des données en POST vers une API
+- name: Get IP information
   hosts: localhost
   tasks:
-    - name: Envoyer une requête POST
-      ansible.builtin.uri:
-        url: "https://jsonplaceholder.typicode.com/users"
-        method: POST
+    - name: Get IP info from API
+      uri:
+        url: https://api.ipify.org?format=json
+        method: GET
         validate_certs: no
-        body_format: json
-        body:
-          name: "Yehouda"
-          email: "yehouda@example.com"
-          username: "yehouda_admin"
-        headers:
-          Content-Type: "application/json"
-        status_code: [200, 201]  # Accepte à la fois 200 et 201
         return_content: yes
-      register: api_response
+      register: ip_info
 
-    - name: Afficher la réponse de l'API
-      ansible.builtin.debug:
-        msg: "{{ api_response.json }}"
+    - name: Print IP information
+      debug:
+        msg: "Public IP: {{ ip_info.json.ip }}"
