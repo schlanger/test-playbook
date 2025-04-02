@@ -3,7 +3,7 @@
   become: yes
   become_method: sudo
   vars:
-  ansible_become_flags: '-n'
+    ansible_become_flags: '-n'
   vars_files:
     - secrets.yml
 
