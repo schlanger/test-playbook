@@ -7,10 +7,6 @@
     - secrets.yml
 
   tasks:
-    - name: Installer sudo
-      ansible.builtin.dnf:
-        name: sudo
-        state: present
     - name: Vérifier si sudo fonctionne
       ansible.builtin.command: sudo -l
       register: sudo_test
