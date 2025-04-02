@@ -1,9 +1,13 @@
-- name: Vérifier la connectivité des hôtes
+- name: Get IP information
   hosts: localhost
   tasks:
-    - name: Ping localhost
-      ansible.builtin.ping:
-    - name: Print message
-      ansible.builtin.debug:
-        msg: Hello world
+    - name: Get IP info from API
+      uri:
+        url: https://api.ipify.org?format=json
+        method: GET
+        return_content: yes
+      register: ip_info
 
+    - name: Print IP information
+      debug:
+        msg: "Public IP: {{ ip_info.json.ip }}"
