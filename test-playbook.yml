@@ -6,6 +6,7 @@
       ansible.builtin.uri:
         url: "https://jsonplaceholder.typicode.com/users"
         method: POST
+        validate_certs: no
         body_format: json
         body:
           name: "Yehouda"
