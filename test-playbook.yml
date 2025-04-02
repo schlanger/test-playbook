@@ -1,12 +1,11 @@
 
-- name: Envoyer des données à une API REST
+- name: Envoyer des données en POST vers une API
   hosts: localhost
   tasks:
-    - name: Créer un nouvel utilisateur
+    - name: Envoyer une requête POST
       ansible.builtin.uri:
         url: "https://jsonplaceholder.typicode.com/users"
         method: POST
-        validate_certs: no
         body_format: json
         body:
           name: "Yehouda"
@@ -14,9 +13,10 @@
           username: "yehouda_admin"
         headers:
           Content-Type: "application/json"
+        status_code: [200, 201]  # Accepte à la fois 200 et 201
         return_content: yes
-      register: response
+      register: api_response
 
     - name: Afficher la réponse de l'API
       ansible.builtin.debug:
-        msg: "{{ response.json }}"
+        msg: "{{ api_response.json }}"
