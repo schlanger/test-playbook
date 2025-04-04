@@ -1,6 +1,6 @@
 
 - name: Get IP information
-  hosts: localhost
+  hosts: debian_machines
   tasks:
     - name: Get IP info from API
       uri:
